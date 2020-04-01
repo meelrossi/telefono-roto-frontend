@@ -1,46 +1,51 @@
 import React, { Component } from 'react';
-import CanvasDraw from "react-canvas-draw";
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import './Game.scss';
+import { GlobalContext } from 'contexts/GlobalContext';
+import ActiveGame from './components/ActiveGame'
+import FinishedGame from './components/FinishedGame'
+import Lobby from './components/Lobby';
 
-export default class Game extends Component {
 
-  clearCanvas = () => {
-    this.canvas.clear();
+class NotFound extends Component {
+  render() {
+    return (<span>NotFound</span>)
   }
+}
 
-  undoCanvas = () => {
-    this.canvas.undo();
+class Game extends Component {
+  compoenntDidMount() {
+    console.log(`GameID: ${this.props.match.params.id}`);
+    // open websocket
+    // register events for updating
   }
 
   render() {
-    const height = window.outerHeight > 550 ? 550 : window.outerHeight - 40;
-    const width = window.outerWidth > 400 ? 400 : window.outerWidth - 40;
+    let Component;
+    switch (this.context.game.status) {
+      case 'active':
+        Component = ActiveGame;
+        break;
+      case 'lobby':
+        Component = Lobby;
+        break;
+      case 'finished':
+        Component = FinishedGame;
+        break;
+      default:
+        Component = NotFound;
+    }
     return (
-      <div className="container">
-        <div id='canvas-container' className="canvas-container">
-          <div className="game-info">
-            <div className='button-container'>
-              <button className="action-button" onClick={this.undoCanvas}>
-                Undo
-              </button>
-              <button className="action-button"  onClick={this.clearCanvas}>
-                Clear
-              </button>
-            </div>
-            
-            <span className="timer">00:20</span>
-          </div>
-          <CanvasDraw
-            ref={canvasDraw => this.canvas = canvasDraw}
-            hideGrid
-            brushRadius={3}
-            lazyRadius={0}
-            canvasWidth={width}
-            canvasHeight={height}
-          />
-        </div>
-      </div>
+      <Component />
     )
   }
-}  
+}
+
+Game.propTypes = {
+  match: PropTypes.object
+}
+
+Game.contextType = GlobalContext;
+
+export default withRouter(Game)
