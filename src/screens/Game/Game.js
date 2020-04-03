@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import socketIOClient from 'socket.io-client';
 
 import { GlobalContext } from 'contexts/GlobalContext';
 import ActiveGame from './components/ActiveGame'
@@ -15,8 +16,11 @@ class NotFound extends Component {
 }
 
 class Game extends Component {
-  compoenntDidMount() {
+  componentDidMount() {
     console.log(`GameID: ${this.props.match.params.id}`);
+    const socket = socketIOClient('http://localhost:5000');
+    socket.emit('join_game', { username: this.context.username, game_id: this.props.match.params.id })
+    socket.on('user_joined', data => { console.dir(data) });
     // open websocket
     // register events for updating
   }

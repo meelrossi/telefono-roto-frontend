@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const DEFAULT_CONTEXT = {
   username: '',
-  game: { status: 'lobby' }
+  game: {}
 }
 
 export const GlobalContext = createContext(DEFAULT_CONTEXT);
@@ -13,6 +13,10 @@ export class GlobalContextProvider extends Component {
 
   updateUsername = username => {
     this.setState({ username })
+  }
+
+  setGame = game => {
+    this.setState({ game })
   }
 
   render() {

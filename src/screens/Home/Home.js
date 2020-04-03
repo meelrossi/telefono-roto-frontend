@@ -8,6 +8,8 @@ import { GlobalContext } from 'contexts/GlobalContext';
 class Home extends Component {
   createNewGame = async () => {
     const response = await gameService.createNewGame(this.context.username);
+    console.dir(response.data);
+    this.context.setGame(response.data);
     this.props.history.push(`/game/${response.data.id}`);
   }
 
