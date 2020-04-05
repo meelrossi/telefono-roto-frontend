@@ -21,7 +21,11 @@ export class GlobalContextProvider extends Component {
 
   render() {
     return (
-      <GlobalContext.Provider value={{ ...this.state, updateUsername: this.updateUsername }}>
+      <GlobalContext.Provider value={{
+        ...this.state,
+        updateUsername: this.updateUsername,
+        setGame: this.setGame
+      }}>
         {this.props.children}
       </GlobalContext.Provider>
     )

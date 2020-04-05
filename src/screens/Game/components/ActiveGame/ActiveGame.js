@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import CanvasDraw from "react-canvas-draw";
 
+import { downloadCanvasAsPng } from 'utils/canvas';
+
 import './ActiveGame.scss';
 
 class ActiveGame extends Component {
@@ -10,6 +12,10 @@ class ActiveGame extends Component {
 
   undoCanvas = () => {
     this.canvas.undo();
+  }
+
+  exportToPng = () => {
+    downloadCanvasAsPng(this.canvas.canvas.drawing);
   }
 
   render() {
@@ -25,6 +31,9 @@ class ActiveGame extends Component {
               </button>
               <button className="action-button" onClick={this.clearCanvas}>
                 Clear
+              </button>
+              <button className="action-button" onClick={this.exportToPng}>
+                To .png
               </button>
             </div>
 

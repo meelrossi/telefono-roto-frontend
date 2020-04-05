@@ -3,7 +3,9 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import socketIOClient from 'socket.io-client';
 
+import * as gameService from 'services/game-service';
 import { GlobalContext } from 'contexts/GlobalContext';
+
 import ActiveGame from './components/ActiveGame'
 import FinishedGame from './components/FinishedGame'
 import Lobby from './components/Lobby';
@@ -16,10 +18,12 @@ class NotFound extends Component {
 }
 
 class Game extends Component {
-  componentDidMount() {
-    console.log(`GameID: ${this.props.match.params.id}`);
+  async componentDidMount() {
+    const gameId = this.props.match.params.id;
+    const response = await gameService.getGame(gameId);
+    this.context.setGame(response.data);
     const socket = socketIOClient('http://localhost:5000');
-    socket.emit('join_game', { username: this.context.username, game_id: this.props.match.params.id })
+    socket.emit('join_game', { username: this.context.username, game_id: gameId })
     socket.on('user_joined', data => { console.dir(data) });
     // open websocket
     // register events for updating

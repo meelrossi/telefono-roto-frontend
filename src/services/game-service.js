@@ -5,3 +5,7 @@ export const createNewGame = async username => {
   return response;
 }
   
+export const getGame = async game_id => {
+  const response = await api.get(`/games/${game_id}`);
+  return response;
+}

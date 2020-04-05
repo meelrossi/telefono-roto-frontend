@@ -5,11 +5,11 @@ import { withRouter } from 'react-router-dom';
 import * as gameService from 'services/game-service';
 import { GlobalContext } from 'contexts/GlobalContext';
 
+import './Home.scss';
+
 class Home extends Component {
   createNewGame = async () => {
     const response = await gameService.createNewGame(this.context.username);
-    console.dir(response.data);
-    this.context.setGame(response.data);
     this.props.history.push(`/game/${response.data.id}`);
   }
 
@@ -19,9 +19,15 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <input type='text' onChange={this.updateUsername}/>
-        <button onClick={this.createNewGame}>Create new game</button>
+      <div className="home-container">
+        <div className="home-game-container">
+          <h1 className="home-title">Telefono Roto</h1>
+          <div className="home-input-container">
+            <span className="home-username-label">Nombre de usuario</span>
+            <input className="home-username-input" type='text' onChange={this.updateUsername} placeholder="Ingresar tu nombre de usuario" />
+          </div>
+          <button className="home-new-game-button" onClick={this.createNewGame}>Crear nueva partida</button>
+        </div>
       </div>
     );
   }
