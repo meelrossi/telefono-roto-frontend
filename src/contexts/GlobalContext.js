@@ -9,7 +9,7 @@ const DEFAULT_CONTEXT = {
 export const GlobalContext = createContext(DEFAULT_CONTEXT);
 
 export class GlobalContextProvider extends Component {
-  state = DEFAULT_CONTEXT; 
+  state = DEFAULT_CONTEXT;
 
   updateUsername = username => {
     this.setState({ username })
@@ -19,12 +19,23 @@ export class GlobalContextProvider extends Component {
     this.setState({ game })
   }
 
+  addPlayer = player => {
+    if (this.state.game.players.find(p => p.username === player.username)) return;
+    this.setState(previousState => {
+      return {
+        ...previousState,
+        game: { ...previousState.game, players: [...previousState.game.players, player] }
+      }
+    });
+  }
+
   render() {
     return (
       <GlobalContext.Provider value={{
         ...this.state,
         updateUsername: this.updateUsername,
-        setGame: this.setGame
+        setGame: this.setGame,
+        addPlayer: this.addPlayer
       }}>
         {this.props.children}
       </GlobalContext.Provider>
