@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import CanvasDraw from "react-canvas-draw";
 
+import { GlobalContext } from 'contexts/GlobalContext';
+import * as gameService from 'services/game-service';
 import { downloadCanvasAsPng } from 'utils/canvas';
 
 import './ActiveGame.scss';
+import Guess from './components/Guess';
+import Draw from './components/Draw';
 
 class ActiveGame extends Component {
+  state = { myTurn: {} }
+
   clearCanvas = () => {
     this.canvas.clear();
   }
@@ -18,9 +23,13 @@ class ActiveGame extends Component {
     downloadCanvasAsPng(this.canvas.canvas.drawing);
   }
 
+  async componentDidMount() {
+    const myTurn = await gameService.getTurn(this.context.game.id, this.context.username)
+    this.setState({ myTurn: myTurn.data })
+  }
+
   render() {
-    const height = window.outerHeight > 550 ? 550 : window.outerHeight - 40;
-    const width = window.outerWidth > 400 ? 400 : window.outerWidth - 40;
+    console.log(this.state.myTurn)
     return (
       <div className = "container" >
         <div id='canvas-container' className="canvas-container">
@@ -36,21 +45,15 @@ class ActiveGame extends Component {
                 To .png
               </button>
             </div>
-
             <span className="timer">00:20</span>
           </div>
-          <CanvasDraw
-            ref={canvasDraw => this.canvas = canvasDraw}
-            hideGrid
-            brushRadius={3}
-            lazyRadius={0}
-            canvasWidth={width}
-            canvasHeight={height}
-          />
+          {this.state.myTurn.task === 'DRAW' && <Draw word={this.state.myTurn.challenge}/>}
+          {this.state.myTurn.task === 'GUESS' &&  <Guess draw={this.state.myTurn.challenge}/>}
         </div>
       </div>
     );
   }
 }
+ActiveGame.contextType = GlobalContext;
 
-export default ActiveGame
+export default ActiveGame;

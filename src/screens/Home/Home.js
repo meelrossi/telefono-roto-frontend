@@ -10,7 +10,10 @@ import './Home.scss';
 class Home extends Component {
   createNewGame = async () => {
     const response = await gameService.createNewGame(this.context.username);
-    this.props.history.push(`/game/${response.data.id}`);
+    const gameId = response.data.id;
+    const userinfo = { username: this.context.username, gameId: gameId }
+    localStorage.setItem('userinfo', JSON.stringify(userinfo));
+    this.props.history.push(`/game/${gameId}`);
   }
 
   updateUsername = evt => {

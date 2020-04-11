@@ -49,16 +49,22 @@ class Game extends Component {
 
   async componentDidMount() {
     await this.updateGameInfo();
-    if (this.context.username) {
+    const userinfo = JSON.parse(localStorage.getItem('userinfo')) || {};
+    const gameId = this.props.match.params.id;
+    if (this.context.username || (userinfo.username && userinfo.gameId == gameId)) {
+      if (userinfo.username) {
+        this.context.updateUsername(userinfo.username);
+      }
       const socket = socketIOClient('http://localhost:5000');
       socket.on('game_event', data => { this.handleGameEvent(data) });
-      socket.emit('join_game', { username: this.context.username, game_id: this.props.match.params.id })
+      socket.emit('join_game', { username: this.context.username, game_id: gameId })
     }
   }
 
   joinGame = async username => {
     this.context.updateUsername(username);
     const gameId = this.props.match.params.id;
+    localStorage.setItem('userinfo', JSON.stringify({ username, gameId }));
     const gameInfo = await gameService.joinGame(gameId, username)
     this.context.setGame(gameInfo.data);
     const socket = socketIOClient('http://localhost:5000');

@@ -21,6 +21,6 @@ export const startGame = async (gameId, username) => {
 }
 
 export const getTurn = async (gameId, username) => {
-  const response = await api.get(`/games/${gameId}/my_turn`, { username });
+  const response = await api.get(`/games/${gameId}/turn`, { params: { username } });
   return response;
 }
