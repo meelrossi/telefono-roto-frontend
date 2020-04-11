@@ -1,115 +1,106 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import socketIOClient from 'socket.io-client';
 
 import * as gameService from 'services/game-service';
 import { GlobalContext } from 'contexts/GlobalContext';
 
-import ActiveGame from './components/ActiveGame'
-import FinishedGame from './components/FinishedGame'
+import ActiveGame from './components/ActiveGame';
+import FinishedGame from './components/FinishedGame';
 import Lobby from './components/Lobby';
 import JoinGame from './components/JoinGame';
-
-
-class NotFound extends Component {
-  render() {
-    return (<span>NotFound</span>)
-  }
-}
+import { connectToSocket } from './utils';
+import { EVENTS, GAME_STATUS } from './constants';
+import NotFound from 'screens/NotFound';
 
 class Game extends Component {
-  state = { myTurn: {} }
+  state = { turn: {} };
 
-  handleGameEvent = data => {
-    switch (data['type']) {
-      case 'player_joined':
-        this.context.addPlayer(data.content);
+  async componentDidMount() {
+    const gameId = this.props.match.params.id;
+    await this.getGameInfo();
+
+    const username = this.context.getUsername(gameId);
+    if (username) {
+      connectToSocket(username, gameId, this.handleGameEvent);
+
+      if (this.context.game.status === 'active') this.getTurnInfo();
+    }
+  }
+
+  handleGameEvent = (type, content) => {
+    switch (type) {
+      case EVENTS.PLAYER_JOINED:
+        this.context.addPlayer(content);
         break;
-      case 'game_started':
-        this.updateGameInfo();
-        console.log(`Game started! by socketio`);
+      case EVENTS.GAME_STARTED:
+        this.getGameInfo();
+        this.getTurnInfo();
         break;
-      case 'turn_ended':
-        console.log(`Next turn! by socketio`);
+      case EVENTS.TURN_ENDED:
         break;
-      case 'round_ended':
-        this.updateTurnInfo();
-        console.log('Next round starting!')
+      case EVENTS.ROUND_ENDED:
+        this.getTurnInfo();
         break;
-      case 'game_ended':
-        this.updateGameInfo();
-        console.log(`Game ended!`);
+      case EVENTS.GAME_ENDED:
+        this.getGameInfo();
+        break;
+      default:
         break;
     }
+  }
+
+  
+
+  joinGame = async username => {
+    const { updateUsername, setGame } = this.context;
+    const gameId = this.props.match.params.id;
+  
+    updateUsername(username);
+    localStorage.setItem('userinfo', JSON.stringify({ username, gameId }));
+
+    const gameInfo = await gameService.joinGame(gameId, username)
+    setGame(gameInfo.data);
+
+    const socket = connectToSocket(username, gameId, this.handleGameEvent);
+    this.setState({ socket });
   }
 
   endTurn = async value => {
-    await gameService.endTurn(value, this.context.game.id, this.context.username);
+    const { game, username } = this.context;
+    await gameService.endTurn(value, game.id, username);
   }
 
-  updateTurnInfo = async () => {
-      const myTurn = await gameService.getTurn(this.context.game.id, this.context.username)
-      this.setState({ myTurn: myTurn.data })
+  getTurnInfo = async () => {
+    const { username, game } = this.context;
+    const turn = await gameService.getTurn(game.id, username)
+    this.setState({ turn: turn.data })
   }
 
-  updateGameInfo = async () => {
+  getGameInfo = async () => {
     const gameId = this.props.match.params.id;
     const response = await gameService.getGame(gameId);
     this.context.setGame(response.data);
-    return response;
-  }
-
-  async componentDidMount() {
-    await this.updateGameInfo();
-    const userinfo = JSON.parse(localStorage.getItem('userinfo')) || {};
-    const gameId = this.props.match.params.id;
-    if (this.context.username || (userinfo.username && userinfo.gameId == gameId)) {
-      if (userinfo.username) {
-        this.context.updateUsername(userinfo.username);
-      }
-      const socket = socketIOClient('http://localhost:5000');
-      socket.on('game_event', data => { this.handleGameEvent(data) });
-      socket.emit('join_game', { username: this.context.username, game_id: gameId })
-    }
-    if (this.context.game.status === 'active') {
-      this.updateTurnInfo();
-    }
-  }
-
-  joinGame = async username => {
-    this.context.updateUsername(username);
-    const gameId = this.props.match.params.id;
-    localStorage.setItem('userinfo', JSON.stringify({ username, gameId }));
-    const gameInfo = await gameService.joinGame(gameId, username)
-    this.context.setGame(gameInfo.data);
-    const socket = socketIOClient('http://localhost:5000');
-    socket.on('game_event', data => { this.handleGameEvent(data) });
-    socket.emit('join_game', { username: this.context.username, game_id: gameId })
   }
 
   render() {
-    let Component;
-    console.dir(this.context.game);
-    if (!this.context.username) {
-      return (<JoinGame joinGame={this.joinGame}/>);
-    }
-    switch (this.context.game.status) {
-      case 'active':
-        Component = ActiveGame;
-        break;
-      case 'lobby':
-        Component = Lobby;
-        break;
-      case 'finished':
-        Component = FinishedGame;
-        break;
+    const { username, game } = this.context;
+    const { turn, loading } = this.state;
+
+    if (!username) return <JoinGame joinGame={this.joinGame}/>;
+
+    if (loading) return <span>Loading...</span>
+
+    switch (game.status) {
+      case GAME_STATUS.ACTIVE:
+        return <ActiveGame onEndTurn={this.endTurn} turn={turn} />
+      case GAME_STATUS.LOBBY:
+        return <Lobby />
+      case GAME_STATUS.FINISHED:
+        return <FinishedGame />
       default:
-        Component = NotFound;
+        return <NotFound />
     }
-    return (
-      <Component onEndTurn={this.endTurn} turn={this.state.myTurn}/>
-    )
   }
 }
 

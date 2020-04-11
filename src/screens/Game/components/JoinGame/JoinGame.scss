@@ -1,0 +1,74 @@
+@import 'styles/variables/colors';
+
+.join-container {
+  background: $white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.join-game-container {
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  max-height: 500px;
+  background-color: $pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px 30px;
+}
+
+.join-title {
+  font-size: 50px;
+  font-weight: bold;
+  color: $white;
+  line-height: 55px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.join-input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.join-username-label {
+  font-weight: bold;
+  color: $white;
+  margin-bottom: 5px;
+}
+
+.join-username-input {
+  background-color: transparent;
+  border-bottom: 1px solid $white;
+  padding: 5px;
+  color: $white;
+
+  &::placeholder {
+    color: $white;
+    font-style: italic;
+    opacity: 0.5;
+  }
+}
+
+.join-new-game-button {
+  color: $white;
+  font-size: 18px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $dark-blue;
+}
+
+@media only screen and (max-width : 500px) {
+  .join-game-container {
+    max-height: none;
+    max-width: none;
+    border-radius: 0;
+  }
+}

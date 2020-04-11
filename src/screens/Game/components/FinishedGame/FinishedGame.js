@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+
 class FinishedGame extends Component {
   render() {
     return (

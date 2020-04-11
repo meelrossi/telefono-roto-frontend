@@ -3,25 +3,36 @@ import PropTypes from 'prop-types';
 
 import { GlobalContext } from 'contexts/GlobalContext';
 
+import './JoinGame.scss';
+
 export default class JoinGame extends Component {
   updateUsername = evt => {
-    this.setState({ username : evt.target.value })
+    const username = evt.target.value;
+    this.setState({ username });
   }
 
   joinGame = () => {
-    this.props.joinGame(this.state.username);
+    const { username } = this.state;
+    const { joinGame } = this.props;
+
+    joinGame(username);
   }
 
   render() {
     return (
-      <div className="home-container">
-        <div className="home-game-container">
-          <h1 className="home-title">Telefono Roto</h1>
-          <div className="home-input-container">
-            <span className="home-username-label">Nombre de usuario</span>
-            <input className="home-username-input" type='text' onChange={this.updateUsername} placeholder="Ingresar tu nombre de usuario" />
+      <div className="join-container">
+        <div className="join-game-container">
+          <h1 className="join-title">Telefono Roto</h1>
+          <div className="join-input-container">
+            <span className="join-username-label">Nombre de usuario</span>
+            <input
+              className="join-username-input"
+              type='text'
+              onChange={this.updateUsername}
+              placeholder="Ingresar tu nombre de usuario"
+            />
           </div>
-          <button className="home-new-game-button" onClick={this.joinGame}>Entrar</button>
+          <button className="join-new-game-button" onClick={this.joinGame}>Entrar</button>
         </div>
       </div>
     )

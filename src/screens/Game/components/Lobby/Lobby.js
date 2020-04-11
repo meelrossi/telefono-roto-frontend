@@ -7,19 +7,24 @@ import { withRouter } from 'react-router-dom';
 
 class Lobby extends Component {
   startGame = async () => {
-    await gameService.startGame(this.props.match.params.id, this.context.username)
+    const { username } = this.context;
+    const gameId = this.props.match.params.id;
+  
+    await gameService.startGame(gameId, username);
   }
 
   render() {
-    const players = this.context.game.players;
-    const isOwner = this.context.game.owner === this.context.username;
+    const { game, username } = this.context;
+    const { players, owner } = game;
+
+    const isOwner = owner === username;
     return (
       <div>
         <span>Lobby</span>
         <ul>
           {players.map(player => <li key={player.id}>{player.username}</li>)}
         </ul>
-        { isOwner && <button onClick={this.startGame}>Empezar partida</button> }
+        {isOwner && <button onClick={this.startGame}>Empezar partida</button>}
       </div>
     )
   }
