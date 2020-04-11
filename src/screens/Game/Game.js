@@ -19,6 +19,8 @@ class NotFound extends Component {
 }
 
 class Game extends Component {
+  state = { myTurn: {} }
+
   handleGameEvent = data => {
     switch (data['type']) {
       case 'player_joined':
@@ -32,12 +34,23 @@ class Game extends Component {
         console.log(`Next turn! by socketio`);
         break;
       case 'round_ended':
-        console.log(`Round ended! Next round incoming`);
+        this.updateTurnInfo();
+        console.log('Next round starting!')
         break;
       case 'game_ended':
+        this.updateGameInfo();
         console.log(`Game ended!`);
         break;
     }
+  }
+
+  endTurn = async value => {
+    await gameService.endTurn(value, this.context.game.id, this.context.username);
+  }
+
+  updateTurnInfo = async () => {
+      const myTurn = await gameService.getTurn(this.context.game.id, this.context.username)
+      this.setState({ myTurn: myTurn.data })
   }
 
   updateGameInfo = async () => {
@@ -58,6 +71,9 @@ class Game extends Component {
       const socket = socketIOClient('http://localhost:5000');
       socket.on('game_event', data => { this.handleGameEvent(data) });
       socket.emit('join_game', { username: this.context.username, game_id: gameId })
+    }
+    if (this.context.game.status === 'active') {
+      this.updateTurnInfo();
     }
   }
 
@@ -92,7 +108,7 @@ class Game extends Component {
         Component = NotFound;
     }
     return (
-      <Component />
+      <Component onEndTurn={this.endTurn} turn={this.state.myTurn}/>
     )
   }
 }
