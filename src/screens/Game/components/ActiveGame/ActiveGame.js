@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { GlobalContext } from 'contexts/GlobalContext';
 import * as gameService from 'services/game-service';
-import { downloadCanvasAsPng } from 'utils/canvas';
 
 import './ActiveGame.scss';
 import Guess from './components/Guess';
@@ -11,21 +10,15 @@ import Draw from './components/Draw';
 class ActiveGame extends Component {
   state = { myTurn: {} }
 
-  clearCanvas = () => {
-    this.canvas.clear();
-  }
-
-  undoCanvas = () => {
-    this.canvas.undo();
-  }
-
-  exportToPng = () => {
-    downloadCanvasAsPng(this.canvas.canvas.drawing);
-  }
-
   async componentDidMount() {
     const myTurn = await gameService.getTurn(this.context.game.id, this.context.username)
     this.setState({ myTurn: myTurn.data })
+  }
+
+  endTurn = async value => {
+    await gameService.endTurn(value, this.context.game.id, this.context.username);
+    // Maybe update to next turn?
+    // Listen for event?
   }
 
   render() {
@@ -47,8 +40,8 @@ class ActiveGame extends Component {
             </div>
             <span className="timer">00:20</span>
           </div>
-          {this.state.myTurn.task === 'DRAW' && <Draw word={this.state.myTurn.challenge}/>}
-          {this.state.myTurn.task === 'GUESS' &&  <Guess draw={this.state.myTurn.challenge}/>}
+          {this.state.myTurn.task === 'DRAW' && <Draw word={this.state.myTurn.challenge} onFinishTurn={this.endTurn}/>}
+          {this.state.myTurn.task === 'GUESS' &&  <Guess draw={this.state.myTurn.challenge} onFinishTurn={this.endTurn}/>}
         </div>
       </div>
     );

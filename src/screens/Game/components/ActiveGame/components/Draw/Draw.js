@@ -2,9 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CanvasDraw  from 'react-canvas-draw';
 
+import { downloadCanvasAsPng } from 'utils/canvas';
+
 export class Draw extends Component {
   static propTypes = {
-    word: PropTypes.string
+    word: PropTypes.string,
+    onFinishTurn: PropTypes.func
+  }
+
+  handleFinishTurn = () => {
+    this.props.onFinishTurn(this.canvas.canvas.drawing.toDataURL());
+  }
+
+  clearCanvas = () => {
+    this.canvas.clear();
+  }
+
+  undoCanvas = () => {
+    this.canvas.undo();
+  }
+
+  exportToPng = () => {
+    downloadCanvasAsPng(this.canvas.canvas.drawing);
   }
 
   render() {
@@ -21,6 +40,7 @@ export class Draw extends Component {
           canvasWidth={width}
           canvasHeight={height}
         />
+        <button onClick={this.handleFinishTurn}>Enviar</button>
       </div>
     )
   }

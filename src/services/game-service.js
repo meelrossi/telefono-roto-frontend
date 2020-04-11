@@ -24,3 +24,8 @@ export const getTurn = async (gameId, username) => {
   const response = await api.get(`/games/${gameId}/turn`, { params: { username } });
   return response;
 }
+
+export const endTurn = async (value, gameId, username) => {
+  const response = await api.post(`/games/${gameId}/end_turn`, { username, drawing_or_guess: { value } });
+  return response;
+}
