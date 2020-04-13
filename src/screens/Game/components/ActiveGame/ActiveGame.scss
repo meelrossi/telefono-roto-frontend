@@ -6,11 +6,11 @@
   font-weight: 700;
 }
 
-.container {
+.active-game-container {
   align-items: center;
   background-color: $light-blue;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100vh;
   justify-content: center;
   width: 100vw;
@@ -49,4 +49,36 @@
   .canvas-container {
     border-radius: 0;
   }
+}
+
+// Copied from Lobby.scss
+.players-done-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 500px;
+  max-height: 750px;
+  height: 100%;
+}
+
+.user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  margin: 0 0px 5px 5px;
+  background-color: $dark-blue;
+  border-radius: 4px;
+
+  span {
+    font-size: 20px;
+    color: $white;
+    margin-bottom: 15px;
+  }
+}
+
+.user-icon {
+  max-width: 50px;
 }

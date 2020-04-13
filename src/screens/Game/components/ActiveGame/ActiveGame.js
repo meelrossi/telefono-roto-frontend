@@ -7,6 +7,7 @@ import { TASKS } from 'screens/Game/constants';
 import './ActiveGame.scss';
 import Guess from './components/Guess';
 import Draw from './components/Draw';
+import { ICONS } from 'utils/icons';
 
 class ActiveGame extends Component {
   render() {
@@ -14,15 +15,25 @@ class ActiveGame extends Component {
     const { task, challenge } = turn;
 
     return (
-      <div className = "container" >
+      <div className="active-game-container">
         <div id='canvas-container' className="canvas-container">
           <div className="game-info">
             <span className="timer">00:20</span>
           </div>
-          {task === TASKS.DRAW && <Draw word={challenge} onFinishTurn={onEndTurn}/>}
-          {task === TASKS.GUESS &&  <Guess draw={challenge} onFinishTurn={onEndTurn}/>}
-          {task === TASKS.WAIT && <span style={{color: 'white'}}>Wait, fucker</span>}
+          <div className="task-container">
+            {task === TASKS.DRAW && <Draw word={challenge} onFinishTurn={onEndTurn} />}
+            {task === TASKS.GUESS && <Guess draw={challenge} onFinishTurn={onEndTurn} />}
+            {task === TASKS.WAIT && <span style={{ color: 'white' }}>Wait, fucker</span>}
+          </div>
         </div>
+        <ul className="players-done-container">
+          {this.props.playersDone.map(username => (
+            <li key={username} className="user-container">
+              <span>{username}</span>
+              <img className="user-icon" alt={username} src={ICONS[Math.floor(Math.random() * ICONS.length)]} />
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
@@ -30,7 +41,8 @@ class ActiveGame extends Component {
 
 ActiveGame.propTypes = {
   onEndTurn: PropTypes.func,
-  turn: PropTypes.object
+  turn: PropTypes.object,
+  playersDone: PropTypes.array
 }
 
 ActiveGame.contextType = GlobalContext;
