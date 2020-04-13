@@ -87,7 +87,7 @@ class Game extends Component {
     const { username, game } = this.context;
     const { turn, loading } = this.state;
 
-    if (!username) return <JoinGame joinGame={this.joinGame}/>;
+    if (!username && game.status !== GAME_STATUS.FINISHED) return <JoinGame joinGame={this.joinGame}/>;
 
     if (loading) return <span>Loading...</span>
 

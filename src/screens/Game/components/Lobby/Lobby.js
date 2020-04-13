@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 
 import * as gameService from 'services/game-service';
 import { GlobalContext } from 'contexts/GlobalContext';
-import { ICONS } from 'utils/icons';
+import { getIconWithString } from 'utils/icons';
 
 import './Lobby.scss';
+
+window.getIconWithString = getIconWithString;
 
 class Lobby extends Component {
   startGame = async () => {
@@ -42,7 +44,7 @@ class Lobby extends Component {
             {players.map(player => (
               <li key={player.id} className="user-container">
                 <span>{player.username}</span>
-                <img className="user-icon" src={ICONS[Math.floor(Math.random() * ICONS.length)]} />
+                <img className="user-icon" src={getIconWithString(`${player.username}${game.id}`)} />
               </li>
             ))}
           </ul>

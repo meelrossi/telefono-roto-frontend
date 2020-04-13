@@ -3,8 +3,20 @@ import PropTypes from 'prop-types';
 
 export class Guess extends Component {
   state = {
-    guess: ''
+    guess: '',
+    time: 60
   };
+
+  componentDidMount() {
+    // setInterval(() => {
+    //   const { time } = this.state;
+    //   if (time > 0) {
+    //     this.setState({ time: time - 1 })
+    //   } else {
+    //     this.handleFinishTurn()
+    //   }
+    // }, 1000)
+  }
 
   handleFinishTurn = () => {
     const { onFinishTurn } = this.props;

@@ -41,3 +41,11 @@ export const ICONS = [
   SpiderIcon,
   WhaleIcon,
 ];
+
+export const getIconWithString = value => {
+  let sumTotal = 0;
+  for (let i = 0; i < value.length; i++) {
+    sumTotal += value.charCodeAt(i);
+  }
+  return ICONS[sumTotal % ICONS.length];
+}

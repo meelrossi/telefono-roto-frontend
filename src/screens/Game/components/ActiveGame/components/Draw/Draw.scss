@@ -1,0 +1,37 @@
+@import 'styles/variables/colors';
+
+.action-button {
+  background-color: $medium-blue;
+  color: $white;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 5px 10px;
+  border: none;
+}
+
+.timer {
+  color: $pink;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.game-word {
+  font-family: 'Handwritten', sans-serif;
+  color: $white;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}

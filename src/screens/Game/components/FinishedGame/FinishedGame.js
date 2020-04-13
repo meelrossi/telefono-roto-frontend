@@ -4,26 +4,18 @@ import { GlobalContext } from 'contexts/GlobalContext';
 import PropTypes from 'prop-types'
 
 import './FinishedGame.scss'
+import DrawOrGuessCarousel from './components/DrawOrGuessCarousel';
 class Libretita extends Component {
   propTypes = {
     libretita: PropTypes.object
   } 
   render() {
+    const { libretita } = this.props;
+
     return (
       <div className="libretita-container">
-        <div className="dorgs-container">
-        {
-        this.props.libretita.drawings_or_guesses.map(dorg => {
-          return (
-            <div className="dorg" key={dorg.id}>
-              {dorg.step_type === 'DRAW' && <img className="guessed-drawing" src={dorg.value}/> }
-              {dorg.step_type === 'GUESS' && <span className="guessed-word">{dorg.value}</span>}
-            </div>
-          )
-        }) 
-        }
-        </div>
-        <span className="owner-name">Libretita de {this.props.libretita.first_player}</span>
+        <DrawOrGuessCarousel drawingsOrGuesses={libretita.drawings_or_guesses} />
+        <span className="libretita-owner-name">Libretita de {this.props.libretita.first_player}</span>
       </div>
     )
   }
@@ -31,15 +23,13 @@ class Libretita extends Component {
 
 class FinishedGame extends Component {
   render() {
+    const { game } = this.context;
     return (
       <div className="finish-container">
-        {
-          this.context.game.libretitas.map(l => {
-            return (
-              <Libretita key={l.id} libretita={l}/>
-            )
-          })
-        }
+        <span className="finish-title">Partida terminada</span>
+        <div className="libretitas">
+          {game.libretitas.map(l => <Libretita key={l.id} libretita={l}/>)}
+        </div>
       </div>
     )
   }

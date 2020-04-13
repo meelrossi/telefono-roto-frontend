@@ -16,9 +16,6 @@ class ActiveGame extends Component {
     return (
       <div className = "container" >
         <div id='canvas-container' className="canvas-container">
-          <div className="game-info">
-            <span className="timer">00:20</span>
-          </div>
           {task === TASKS.DRAW && <Draw word={challenge} onFinishTurn={onEndTurn}/>}
           {task === TASKS.GUESS &&  <Guess draw={challenge} onFinishTurn={onEndTurn}/>}
           {task === TASKS.WAIT && <span style={{color: 'white'}}>Wait, fucker</span>}

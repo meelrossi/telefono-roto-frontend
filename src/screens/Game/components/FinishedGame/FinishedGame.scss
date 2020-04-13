@@ -1,0 +1,40 @@
+@import 'styles/variables/colors';
+
+.finish-container {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: linear-gradient(0, $dark-blue, $pink);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.finish-title {
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 55px;
+  color: $white;
+  margin-bottom: 40px;
+}
+
+.libretitas {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.libretita-container {
+  margin-right: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.libretita-owner-name {
+  font-family: 'Handwritten', sans-serif;
+  background-color: $white;
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  font-size: 20px;
+}
