@@ -12,14 +12,14 @@ export class Draw extends Component {
   }
 
   componentDidMount() {
-    // setInterval(() => {
-    //   const { time } = this.state;
-    //   if (time > 0) {
-    //     this.setState({ time: time - 1 })
-    //   } else {
-    //     this.handleFinishTurn()
-    //   }
-    // }, 1000)
+    setInterval(() => {
+      const { time } = this.state;
+      if (time > 0) {
+        this.setState({ time: time - 1 })
+      } else {
+        this.handleFinishTurn()
+      }
+    }, 1000)
   }
 
   handleFinishTurn = () => {
@@ -44,12 +44,11 @@ export class Draw extends Component {
     const displayTime = `00:${`0${time}`.slice(-2)}`;
 
     return (
-      <div>
+      <div className="game-draw-container">
+        <span className="game-word">{this.props.word}</span>
         <div className="game-info">
-          <span className="game-word">{this.props.word}</span>
           <span className="timer">{displayTime}</span>
-        </div>
-        <div className='button-container'>
+          <div className='button-container'>
           <button className="action-button" onClick={this.undoCanvas}>
             Deshacer
           </button>
@@ -60,6 +59,7 @@ export class Draw extends Component {
             Exportar a .png
           </button>
         </div>
+        </div>
         <CanvasDraw
           ref={canvasDraw => this.canvas = canvasDraw}
           hideGrid
@@ -68,7 +68,7 @@ export class Draw extends Component {
           canvasWidth={WIDTH}
           canvasHeight={HEIGHT}
         />
-        <button onClick={this.handleFinishTurn}>Enviar</button>
+        <button className="draw-send" onClick={this.handleFinishTurn}>Terminar turno</button>
       </div>
     )
   }

@@ -26,6 +26,45 @@
   box-sizing: border-box;
 }
 
+.wait-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wait-text {
+  font-size: 16px;
+  color: $white;
+  margin-bottom: 30px;
+}
+
+.wait-loader {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+}
+
+.wait-loader:after {
+  content: " ";
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: loader 1.2s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media only screen and (max-width : 500px) {
   .canvas-container {
     border-radius: 0;

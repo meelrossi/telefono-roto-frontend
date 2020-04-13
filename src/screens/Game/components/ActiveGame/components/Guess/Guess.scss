@@ -1,0 +1,39 @@
+@import "styles/variables/colors";
+
+.guess-draw-img {
+  background-color: $white;
+}
+
+.guess-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.guess-timer {
+  color: $pink;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 30px;
+  margin-bottom: 20px;
+}
+
+.guess-input {
+  background-color: $grey-2;
+  font-size: 14px;
+  padding: 10px 15px;
+  width: 100%;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.guess-button {
+  background-color: $pink;
+  color: $white;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 10px;
+  align-self: flex-end;
+  border-radius: 4px;
+  border: none;
+}
