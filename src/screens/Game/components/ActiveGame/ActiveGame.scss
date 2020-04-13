@@ -82,3 +82,10 @@
 .user-icon {
   max-width: 50px;
 }
+
+// Hide players-done-container from mobile view
+@media only screen and (max-width : 500px) {
+  .players-done-container {
+    display: none;
+  }
+}
