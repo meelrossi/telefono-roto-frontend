@@ -14,7 +14,7 @@ import { EVENTS, GAME_STATUS } from './constants';
 import NotFound from 'screens/NotFound';
 
 class Game extends Component {
-  state = { turn: {} };
+  state = { turn: {}, playersDone: [] };
 
   async componentDidMount() {
     const gameId = this.props.match.params.id;
@@ -38,8 +38,10 @@ class Game extends Component {
         this.getTurnInfo();
         break;
       case EVENTS.TURN_ENDED:
+        this.setState({ playersDone: [...this.state.playersDone, content] });
         break;
       case EVENTS.ROUND_ENDED:
+        this.setState({ playersDone: [] });
         this.getTurnInfo();
         break;
       case EVENTS.GAME_ENDED:
@@ -49,8 +51,6 @@ class Game extends Component {
         break;
     }
   }
-
-  
 
   joinGame = async username => {
     const { updateUsername, setGame } = this.context;
@@ -85,15 +85,14 @@ class Game extends Component {
 
   render() {
     const { username, game } = this.context;
-    const { turn, loading } = this.state;
+    const { turn, playersDone } = this.state;
 
     if (!username && game.status !== GAME_STATUS.FINISHED) return <JoinGame joinGame={this.joinGame}/>;
 
-    if (loading) return <span>Loading...</span>
-
+    console.log(playersDone);
     switch (game.status) {
       case GAME_STATUS.ACTIVE:
-        return <ActiveGame onEndTurn={this.endTurn} turn={turn} />
+        return <ActiveGame onEndTurn={this.endTurn} turn={turn} playersDone={playersDone}/>
       case GAME_STATUS.LOBBY:
         return <Lobby />
       case GAME_STATUS.FINISHED:
