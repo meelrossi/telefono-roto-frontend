@@ -4,6 +4,11 @@ import { withRouter } from 'react-router-dom';
 
 import * as gameService from 'services/game-service';
 import { GlobalContext } from 'contexts/GlobalContext';
+import SheepIcon from 'assets/sheep_draw.png';
+import OwlIcon from 'assets/owl_draw.png';
+import HashIcon from 'assets/hash_draw.png';
+import HouseIcon from 'assets/house_draw.png';
+import CoronavirusIcon from 'assets/coronavirus_draw.png';
 
 import './Home.scss';
 
@@ -24,12 +29,17 @@ class Home extends Component {
     return (
       <div className="home-container">
         <div className="home-game-container">
+          <img className="sheep-draw" src={SheepIcon} alt="sheep" />
+          <img className="owl-draw" src={OwlIcon} alt="owl" />
+          <img className="house-draw" src={HouseIcon} alt="house" />
+          <img className="hash-draw" src={HashIcon} alt="hash" />
+          <img className="coronavirus-draw" src={CoronavirusIcon} alt="coronavirus" />
           <h1 className="home-title">Telefono Roto</h1>
           <div className="home-input-container">
             <span className="home-username-label">Nombre de usuario</span>
             <input className="home-username-input" type='text' onChange={this.updateUsername} placeholder="Ingresar tu nombre de usuario" />
           </div>
-          <button className="home-new-game-button" onClick={this.createNewGame}>Crear nueva partida</button>
+          <button className="base-button" onClick={this.createNewGame}>Crear nueva partida</button>
         </div>
       </div>
     );

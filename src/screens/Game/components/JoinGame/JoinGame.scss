@@ -1,7 +1,7 @@
 @import 'styles/variables/colors';
 
 .join-container {
-  background: $white;
+  background: linear-gradient(0, #F41E6C, #1F2A69);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,20 +11,29 @@
 }
 
 .join-game-container {
-  border-radius: 10px;
+  border-radius: 4px;
   width: 100%;
   max-width: 400px;
   height: 100%;
-  max-height: 500px;
+  max-height: 600px;
   background-color: $pink;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 50px 30px;
+  position: relative;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  color: $white;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .join-title {
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
   color: $white;
   line-height: 55px;
@@ -57,12 +66,11 @@
   }
 }
 
-.join-new-game-button {
-  color: $white;
-  font-size: 18px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: $dark-blue;
+.smile-draw {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
 }
 
 @media only screen and (max-width : 500px) {
