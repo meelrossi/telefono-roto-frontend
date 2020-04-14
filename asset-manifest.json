@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/telefono-roto-frontend/static/css/main.803f8a35.chunk.css",
-    "main.js": "/telefono-roto-frontend/static/js/main.b01aaee1.chunk.js",
-    "main.js.map": "/telefono-roto-frontend/static/js/main.b01aaee1.chunk.js.map",
+    "main.css": "/telefono-roto-frontend/static/css/main.286a54e2.chunk.css",
+    "main.js": "/telefono-roto-frontend/static/js/main.7ff9103e.chunk.js",
+    "main.js.map": "/telefono-roto-frontend/static/js/main.7ff9103e.chunk.js.map",
     "runtime-main.js": "/telefono-roto-frontend/static/js/runtime-main.7ae49851.js",
     "runtime-main.js.map": "/telefono-roto-frontend/static/js/runtime-main.7ae49851.js.map",
-    "static/js/2.62e89611.chunk.js": "/telefono-roto-frontend/static/js/2.62e89611.chunk.js",
-    "static/js/2.62e89611.chunk.js.map": "/telefono-roto-frontend/static/js/2.62e89611.chunk.js.map",
+    "static/js/2.563979c7.chunk.js": "/telefono-roto-frontend/static/js/2.563979c7.chunk.js",
+    "static/js/2.563979c7.chunk.js.map": "/telefono-roto-frontend/static/js/2.563979c7.chunk.js.map",
     "index.html": "/telefono-roto-frontend/index.html",
-    "precache-manifest.08ac7a1d03b8f7e85e88b764191d605e.js": "/telefono-roto-frontend/precache-manifest.08ac7a1d03b8f7e85e88b764191d605e.js",
+    "precache-manifest.2461b9c80b05786685637e100f2d2d72.js": "/telefono-roto-frontend/precache-manifest.2461b9c80b05786685637e100f2d2d72.js",
     "service-worker.js": "/telefono-roto-frontend/service-worker.js",
-    "static/css/main.803f8a35.chunk.css.map": "/telefono-roto-frontend/static/css/main.803f8a35.chunk.css.map",
-    "static/js/2.62e89611.chunk.js.LICENSE.txt": "/telefono-roto-frontend/static/js/2.62e89611.chunk.js.LICENSE.txt",
+    "static/css/main.286a54e2.chunk.css.map": "/telefono-roto-frontend/static/css/main.286a54e2.chunk.css.map",
+    "static/js/2.563979c7.chunk.js.LICENSE.txt": "/telefono-roto-frontend/static/js/2.563979c7.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/telefono-roto-frontend/static/media/TrashHand.28e6ad13.ttf",
     "static/media/animals.png": "/telefono-roto-frontend/static/media/animals.aa31cfcb.png",
     "static/media/bat.png": "/telefono-roto-frontend/static/media/bat.92b1b6fb.png",
@@ -40,8 +40,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.7ae49851.js",
-    "static/js/2.62e89611.chunk.js",
-    "static/css/main.803f8a35.chunk.css",
-    "static/js/main.b01aaee1.chunk.js"
+    "static/js/2.563979c7.chunk.js",
+    "static/css/main.286a54e2.chunk.css",
+    "static/js/main.7ff9103e.chunk.js"
   ]
 }
