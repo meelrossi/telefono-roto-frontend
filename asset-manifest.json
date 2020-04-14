@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/telefono-roto-frontend/static/css/main.803f8a35.chunk.css",
-    "main.js": "/telefono-roto-frontend/static/js/main.10af91c7.chunk.js",
-    "main.js.map": "/telefono-roto-frontend/static/js/main.10af91c7.chunk.js.map",
+    "main.js": "/telefono-roto-frontend/static/js/main.c55a53e5.chunk.js",
+    "main.js.map": "/telefono-roto-frontend/static/js/main.c55a53e5.chunk.js.map",
     "runtime-main.js": "/telefono-roto-frontend/static/js/runtime-main.7ae49851.js",
     "runtime-main.js.map": "/telefono-roto-frontend/static/js/runtime-main.7ae49851.js.map",
     "static/js/2.62e89611.chunk.js": "/telefono-roto-frontend/static/js/2.62e89611.chunk.js",
     "static/js/2.62e89611.chunk.js.map": "/telefono-roto-frontend/static/js/2.62e89611.chunk.js.map",
     "index.html": "/telefono-roto-frontend/index.html",
-    "precache-manifest.c4acbf573c3c49909ff8e9ddb8469dfd.js": "/telefono-roto-frontend/precache-manifest.c4acbf573c3c49909ff8e9ddb8469dfd.js",
+    "precache-manifest.289ca7aa152d1f1e078be515545a10a2.js": "/telefono-roto-frontend/precache-manifest.289ca7aa152d1f1e078be515545a10a2.js",
     "service-worker.js": "/telefono-roto-frontend/service-worker.js",
     "static/css/main.803f8a35.chunk.css.map": "/telefono-roto-frontend/static/css/main.803f8a35.chunk.css.map",
     "static/js/2.62e89611.chunk.js.LICENSE.txt": "/telefono-roto-frontend/static/js/2.62e89611.chunk.js.LICENSE.txt",
@@ -42,6 +42,6 @@
     "static/js/runtime-main.7ae49851.js",
     "static/js/2.62e89611.chunk.js",
     "static/css/main.803f8a35.chunk.css",
-    "static/js/main.10af91c7.chunk.js"
+    "static/js/main.c55a53e5.chunk.js"
   ]
 }
