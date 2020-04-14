@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "71ca4e5fbc5bf84bcfc600e803233626",
+    "revision": "1be5de45afd793c013242ba7d493e7ea",
     "url": "/telefono-roto-frontend/index.html"
   },
   {
-    "revision": "5ee135dd22979b02d243",
+    "revision": "b8e2bdba5878140633fd",
     "url": "/telefono-roto-frontend/static/css/main.286a54e2.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/telefono-roto-frontend/static/js/2.563979c7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5ee135dd22979b02d243",
-    "url": "/telefono-roto-frontend/static/js/main.7e38d7c3.chunk.js"
+    "revision": "b8e2bdba5878140633fd",
+    "url": "/telefono-roto-frontend/static/js/main.bbb97571.chunk.js"
   },
   {
     "revision": "a91956a1680ce8b9fcc2",
