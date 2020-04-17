@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/telefono-roto-frontend/static/css/main.286a54e2.chunk.css",
-    "main.js": "/telefono-roto-frontend/static/js/main.1d9cf8a4.chunk.js",
-    "main.js.map": "/telefono-roto-frontend/static/js/main.1d9cf8a4.chunk.js.map",
+    "main.css": "/telefono-roto-frontend/static/css/main.500fc11c.chunk.css",
+    "main.js": "/telefono-roto-frontend/static/js/main.ed280852.chunk.js",
+    "main.js.map": "/telefono-roto-frontend/static/js/main.ed280852.chunk.js.map",
     "runtime-main.js": "/telefono-roto-frontend/static/js/runtime-main.7ae49851.js",
     "runtime-main.js.map": "/telefono-roto-frontend/static/js/runtime-main.7ae49851.js.map",
     "static/js/2.563979c7.chunk.js": "/telefono-roto-frontend/static/js/2.563979c7.chunk.js",
     "static/js/2.563979c7.chunk.js.map": "/telefono-roto-frontend/static/js/2.563979c7.chunk.js.map",
     "index.html": "/telefono-roto-frontend/index.html",
-    "precache-manifest.6321f79054804a45f11a4b78864f7651.js": "/telefono-roto-frontend/precache-manifest.6321f79054804a45f11a4b78864f7651.js",
+    "precache-manifest.5b037e1963b699ae7b9751e808031e7c.js": "/telefono-roto-frontend/precache-manifest.5b037e1963b699ae7b9751e808031e7c.js",
     "service-worker.js": "/telefono-roto-frontend/service-worker.js",
-    "static/css/main.286a54e2.chunk.css.map": "/telefono-roto-frontend/static/css/main.286a54e2.chunk.css.map",
+    "static/css/main.500fc11c.chunk.css.map": "/telefono-roto-frontend/static/css/main.500fc11c.chunk.css.map",
     "static/js/2.563979c7.chunk.js.LICENSE.txt": "/telefono-roto-frontend/static/js/2.563979c7.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/telefono-roto-frontend/static/media/TrashHand.28e6ad13.ttf",
     "static/media/animals.png": "/telefono-roto-frontend/static/media/animals.aa31cfcb.png",
@@ -41,7 +41,7 @@
   "entrypoints": [
     "static/js/runtime-main.7ae49851.js",
     "static/js/2.563979c7.chunk.js",
-    "static/css/main.286a54e2.chunk.css",
-    "static/js/main.1d9cf8a4.chunk.js"
+    "static/css/main.500fc11c.chunk.css",
+    "static/js/main.ed280852.chunk.js"
   ]
 }

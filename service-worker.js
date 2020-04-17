@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/telefono-roto-frontend/precache-manifest.6321f79054804a45f11a4b78864f7651.js"
+  "/telefono-roto-frontend/precache-manifest.5b037e1963b699ae7b9751e808031e7c.js"
 );
 
 self.addEventListener('message', (event) => {
