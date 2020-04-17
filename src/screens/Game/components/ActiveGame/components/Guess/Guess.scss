@@ -2,6 +2,8 @@
 
 .guess-draw-img {
   background-color: $white;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 180px);
 }
 
 .guess-container {

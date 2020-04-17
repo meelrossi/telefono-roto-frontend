@@ -8,7 +8,7 @@ import './Draw.scss';
 
 export class Draw extends Component {
   state = {
-    time: 10000000,
+    time: 60,
     interval: null
   }
 
