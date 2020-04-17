@@ -14,7 +14,7 @@ class App extends React.Component {
     return (
       <GlobalContextProvider>
         <div className="App">
-          <BrowserRouter>
+          <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Switch>
               <Route exact path={ROUTES.GAME} component={Game} />
               <Route exact path={ROUTES.NOT_FOUND} component={NotFound} />

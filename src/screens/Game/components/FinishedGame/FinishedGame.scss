@@ -20,12 +20,13 @@
 }
 
 .libretitas {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 20px;
 }
 
 .libretita-container {
-  margin-right: 100px;
   display: flex;
   flex-direction: column;
 }
@@ -37,4 +38,27 @@
   text-align: center;
   padding: 15px;
   font-size: 20px;
+}
+
+@media only screen and (max-width : 1160px) {
+  .libretitas {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width : 800px) {
+  .libretitas {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width : 400px) {
+  .finish-title {
+    font-size: 30px;
+    padding: 10px;
+  }
+
+  .finish-container {
+    padding: 0;
+  }
 }

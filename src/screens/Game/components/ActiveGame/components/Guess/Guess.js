@@ -6,18 +6,20 @@ import './Guess.scss';
 export class Guess extends Component {
   state = {
     guess: '',
-    time: 60
+    time: 60,
+    interval: null
   };
 
   componentDidMount() {
-    setInterval(() => {
+    const interval = setInterval(() => {
       const { time } = this.state;
       if (time > 0) {
         this.setState({ time: time - 1 })
       } else {
-        this.handleFinishTurn()
+        this.handleFinishTurn();
       }
-    }, 1000)
+    }, 1000);
+    this.setState({ interval })
   }
 
   handleFinishTurn = () => {
@@ -25,10 +27,15 @@ export class Guess extends Component {
     const { guess } = this.state;
 
     onFinishTurn(guess);
+    clearInterval(this.state.interval);
   }
 
   updateGuess = evt => {
     this.setState({ guess: evt.target.value });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.interval);
   }
 
   render() {

@@ -50,7 +50,7 @@ class Lobby extends Component {
           </ul>
           <div className="invite-container">
             <span className="invite-title">Invita otros amigos</span>
-            <div>
+            <div className="input-container">
               <input id="url-input" className="url-input" value={window.location.href} />
               <button className="copy-button" onClick={this.copyToClipboard}>Copy</button>
             </div>

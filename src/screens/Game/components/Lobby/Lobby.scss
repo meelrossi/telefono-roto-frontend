@@ -2,7 +2,7 @@
 
 .container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: $light-blue;
   display: flex;
   flex-direction: column;
@@ -28,19 +28,22 @@
   border-radius: 4px;
   width: 100%;
   max-width: 550px;
-  height: 100%;
-  max-height: 600px;
   display: flex;
   flex-direction: column;
+}
+
+.input-container {
+  display: flex;
 }
 
 .url-input {
   background-color: $grey-2;
   font-size: 14px;
   padding: 10px 15px;
-  width: 300px;
+  max-width: 300px;
   margin-right: 10px;
   border-radius: 4px;
+  flex: 1
 }
 
 .invite-container {

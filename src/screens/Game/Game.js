@@ -11,7 +11,6 @@ import Lobby from './components/Lobby';
 import JoinGame from './components/JoinGame';
 import { connectToSocket } from './utils';
 import { EVENTS, GAME_STATUS } from './constants';
-import NotFound from 'screens/NotFound';
 
 class Game extends Component {
   state = { turn: {}, playersDone: [] };
@@ -69,6 +68,7 @@ class Game extends Component {
   endTurn = async value => {
     const { game, username } = this.context;
     await gameService.endTurn(value, game.id, username);
+    this.getTurnInfo();
   }
 
   getTurnInfo = async () => {
@@ -89,7 +89,6 @@ class Game extends Component {
 
     if (!username && game.status !== GAME_STATUS.FINISHED) return <JoinGame joinGame={this.joinGame}/>;
 
-    console.log(playersDone);
     switch (game.status) {
       case GAME_STATUS.ACTIVE:
         return <ActiveGame onEndTurn={this.endTurn} turn={turn} playersDone={playersDone}/>
@@ -98,7 +97,7 @@ class Game extends Component {
       case GAME_STATUS.FINISHED:
         return <FinishedGame />
       default:
-        return <NotFound />
+        return <div>Loading...</div>
     }
   }
 }
