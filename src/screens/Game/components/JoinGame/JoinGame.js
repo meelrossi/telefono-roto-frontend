@@ -6,7 +6,13 @@ import SmileIcon from 'assets/smile_draw.png';
 
 import './JoinGame.scss';
 
+const ENTER_CODE = 13;
+
 export default class JoinGame extends Component {
+  state = {
+    username: ""
+  }
+
   updateUsername = evt => {
     const username = evt.target.value;
     this.setState({ username });
@@ -16,10 +22,19 @@ export default class JoinGame extends Component {
     const { username } = this.state;
     const { joinGame } = this.props;
 
+    if (!username) return;
+  
     joinGame(username);
   }
 
+  handleKeyDown = evt => {
+    if (evt.keyCode === ENTER_CODE) {
+      this.joinGame();
+    }
+  }
+
   render() {
+    const { username } = this.state;
     return (
       <div className="join-container">
         <div className="join-game-container">
@@ -33,9 +48,16 @@ export default class JoinGame extends Component {
               type='text'
               onChange={this.updateUsername}
               placeholder="Ingresar tu nombre de usuario"
+              onKeyDown={this.handleKeyDown}
             />
           </div>
-          <button className="second-button" onClick={this.joinGame}>Entrar</button>
+          <button
+            className="second-button"
+            onClick={this.joinGame}
+            disabled={!username}
+          >
+            Entrar
+          </button>
         </div>
       </div>
     )

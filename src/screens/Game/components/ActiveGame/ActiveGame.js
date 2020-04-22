@@ -26,15 +26,15 @@ class ActiveGame extends Component {
               <span className="wait-loader" />
             </div>
           )}
+          <ul className="players-done-container">
+            {this.props.playersDone.map(username => (
+              <li key={username} className="user-container">
+                <span>{username}</span>
+                <img className="user-icon" alt={username} src={getIconWithString(`${username}${game.id}`)} />
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="players-done-container">
-          {this.props.playersDone.map(username => (
-            <li key={username} className="user-container">
-              <span>{username}</span>
-              <img className="user-icon" alt={username} src={getIconWithString(`${username}${game.id}`)} />
-            </li>
-          ))}
-        </ul>
       </div>
     );
   }

@@ -38,4 +38,8 @@
   align-self: flex-end;
   border-radius: 4px;
   border: none;
+
+  &:disabled {
+    background-color: $grey-4;
+  }
 }

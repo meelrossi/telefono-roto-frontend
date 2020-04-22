@@ -50,7 +50,7 @@ export default class DrawOrGuessCarousel extends PureComponent {
         {currentIndex !== 0 && (
           <div className="draw-guess-user-container">
             <span className="draw-guess-username">{drawOrGuess.player}</span>
-            <img className="draw-guess-icon" src={getIconWithString(`${drawOrGuess.player}${game.id}`)} />
+            <img className="draw-guess-icon" src={getIconWithString(`${drawOrGuess.player}${game.id}`)} alt={drawOrGuess.player} />
           </div>
         )}
         <button className="navigation-button" onClick={this.nextElement}>{'>'}</button>

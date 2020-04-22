@@ -12,11 +12,17 @@ import CoronavirusIcon from 'assets/coronavirus_draw.png';
 
 import './Home.scss';
 
+const ENTER_CODE = 13;
+
 class Home extends Component {
   createNewGame = async () => {
-    const response = await gameService.createNewGame(this.context.username);
+    const { username } = this.context;
+
+    if (!username) return;
+
+    const response = await gameService.createNewGame(username);
     const gameId = response.data.id;
-    const userinfo = { username: this.context.username, gameId: gameId }
+    const userinfo = { username: username, gameId: gameId }
     localStorage.setItem('userinfo', JSON.stringify(userinfo));
     this.props.history.push(`/game/${gameId}`);
   }
@@ -25,7 +31,14 @@ class Home extends Component {
     this.context.updateUsername(evt.target.value);
   }
 
+  handleKeyDown = evt => {
+    if (evt.keyCode === ENTER_CODE) {
+      this.createNewGame();
+    }
+  }
+
   render() {
+    const { username } = this.context;
     return (
       <div className="home-container">
         <div className="home-game-container">
@@ -37,9 +50,21 @@ class Home extends Component {
           <h1 className="home-title">Telefono Roto</h1>
           <div className="home-input-container">
             <span className="home-username-label">Nombre de usuario</span>
-            <input className="home-username-input" type='text' onChange={this.updateUsername} placeholder="Ingresar tu nombre de usuario" />
+            <input
+              className="home-username-input"
+              type='text'
+              onChange={this.updateUsername}
+              placeholder="Ingresar tu nombre de usuario"
+              onKeyDown={this.handleKeyDown}
+            />
           </div>
-          <button className="base-button" onClick={this.createNewGame}>Crear nueva partida</button>
+          <button
+            className="base-button"
+            onClick={this.createNewGame}
+            disabled={!username}
+          >
+            Crear nueva partida
+          </button>
         </div>
       </div>
     );

@@ -3,51 +3,44 @@ import PropTypes from 'prop-types';
 
 import './Guess.scss';
 
+const ENTER_CODE = 13;
+
 export class Guess extends Component {
   state = {
-    guess: '',
-    time: 60,
-    interval: null
+    guess: ''
   };
-
-  componentDidMount() {
-    const interval = setInterval(() => {
-      const { time } = this.state;
-      if (time > 0) {
-        this.setState({ time: time - 1 })
-      } else {
-        this.handleFinishTurn();
-      }
-    }, 1000);
-    this.setState({ interval })
-  }
 
   handleFinishTurn = () => {
     const { onFinishTurn } = this.props;
     const { guess } = this.state;
-
+    
+    if(!guess.length) return;
     onFinishTurn(guess);
-    clearInterval(this.state.interval);
   }
 
   updateGuess = evt => {
     this.setState({ guess: evt.target.value });
   }
 
-  componentWillUnmount() {
-    clearInterval(this.state.interval);
+  handleKeyDown = evt => {
+    if (evt.keyCode === ENTER_CODE) {
+      this.handleFinishTurn();
+    }
   }
 
   render() {
-    const { time } = this.state;
-
-    const displayTime = `00:${`0${time}`.slice(-2)}`;
+    const { guess } = this.state;
+  
     return (
       <div className="guess-container">
-        <span className="guess-timer">{displayTime}</span>
         <img className="guess-draw-img" src={this.props.draw} alt="guess" />
-        <input className="guess-input" placeholder={'Aca escribis tu respuesta'} onChange={this.updateGuess}></input>
-        <button className="guess-button" onClick={this.handleFinishTurn}>Terminar turno</button>
+        <input
+          className="guess-input"
+          placeholder="Aca escribis tu respuesta"
+          onChange={this.updateGuess}
+          onKeyDown={this.handleKeyDown}
+        />
+        <button className="guess-button" onClick={this.handleFinishTurn} disabled={!guess.length}>Terminar turno</button>
       </div>
     )
   }

@@ -44,7 +44,7 @@ class Lobby extends Component {
             {players.map(player => (
               <li key={player.id} className="user-container">
                 <span>{player.username}</span>
-                <img className="user-icon" src={getIconWithString(`${player.username}${game.id}`)} />
+                <img className="user-icon" src={getIconWithString(`${player.username}${game.id}`)} alt={player.username} />
               </li>
             ))}
           </ul>

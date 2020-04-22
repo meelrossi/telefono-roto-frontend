@@ -11,6 +11,10 @@
   padding: 20px;
   border-radius: 10px;
   background-color: $pink;
+
+  &:disabled {
+    background-color: $grey-4;
+  }
 }
 
 .second-button {
